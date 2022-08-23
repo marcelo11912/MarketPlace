@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Shop extends Model
+{
+    use HasFactory;
+
+    protected $fillable=[
+        'name',
+        'description',
+        'is_active',
+        'rating',
+        'user_id',
+    ];
+
+    public function owner(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    //Relacion con productos
+    public function productos(){
+        return $this->hasMany(Producto::class,'shop_id');
+    }
+}
